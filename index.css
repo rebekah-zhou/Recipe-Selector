@@ -1,12 +1,54 @@
+html {
+    font-family: 'Playfair Display';
+}
+
+
 #logo {
-    max-width: 20%;
+    max-width: 250px;
 }
 
 #filters {
-    float: right;
+    text-align: center;
+    margin-top: -170px;
 }
 
 #filters li {
     display: inline-block;
-    padding: 20px
+    padding: 20px;
+    font-size: 1.7rem;
 }
+
+#search-container {
+    float: right;
+    margin-top: -60px;
+    margin-right: 25px;
+}
+
+#recipe-card {
+    
+}
+
+#main-column {
+display: flex;
+flex-direction: row;
+}
+
+.column {
+   margin-top: 200px;
+}
+
+#side-bar {
+    width: 20%;
+}
+
+#recipe-card {
+    width: 80%;
+}
+
+#recipe-index-card {
+    width: 1000px;
+    height: 600px;
+    box-shadow: 10px 10px 20px rgba(33, 32, 32, 0.686);
+    background-color: #E8DDD1;
+}
+
