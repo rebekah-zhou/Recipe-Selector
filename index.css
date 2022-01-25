@@ -217,6 +217,7 @@ flex-direction: row;
 h2 {
     letter-spacing: 2px;
     text-align: center;
+    font-size: 20px;
 }
 
 /*removed ul styling*/
@@ -258,4 +259,21 @@ button:hover {
     border-color: #6B7C60;
     border: 2px solid #6B7C60;
     cursor: pointer;
+}
+
+.filters-container {
+    
+}
+
+/* need help */
+#categories {
+    flex-wrap: wrap; 
+    display: none;
+    background-color: #E8E7D1;
+    margin-top: 100px;
+    margin-inline: 20px;
+}
+
+.filter-img {
+    height: 150px;
 }
