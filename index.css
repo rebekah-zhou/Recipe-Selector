@@ -207,7 +207,6 @@ flex-direction: row;
 h2 {
     letter-spacing: 2px;
     text-align: center;
-    font: 400 15px/1.8 "Lato", sans-serif;
     font-size: 20px;
 }
 
@@ -253,16 +252,16 @@ button:hover {
 }
 
 .filters-container {
-    background-color: #FFEBE6;
-    width: 1500px;
-    height: 100px;
+    
 }
 
+/* need help */
 #categories {
     flex-wrap: wrap; 
     display: none;
     background-color: #E8E7D1;
     margin-top: 100px;
+    margin-inline: 20px;
 }
 
 .filter-img {

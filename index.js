@@ -9,6 +9,7 @@ getFetch(categoriesUrl)
             const a = document.createElement('a')
             const img = document.createElement('img')
             a.textContent = categoryObj.strCategory
+            a.href = ""
             img.src = categoryObj.strCategoryThumb
             img.className = 'filter-img'
             a.append(img)
