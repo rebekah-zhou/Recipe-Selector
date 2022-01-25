@@ -39,6 +39,7 @@ function toggleHiddenContainer(specificFilter) {
     } else {
         specificFilterContainer.style.display = "none"
     }
+}
 
 const randomMeal = ('https://www.themealdb.com/api/json/v1/1/random.php')
 const randomMealButton = document.getElementById('random-meal-button')
