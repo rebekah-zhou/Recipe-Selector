@@ -171,13 +171,13 @@ flex-direction: row;
     width: 25%;
 }
 
-/*added*/
+
 #side-bar li {
     cursor: pointer;
     list-style: none;
 }
 
-/*added line styling*/
+
 #recipe-hr {
     background-color: #6B7C60;
     color:#6B7C60;
@@ -200,13 +200,24 @@ flex-direction: row;
 
 #recipe-right, #recipe-left {
     width: 50%;
-    margin-left: 30px;
+    
+}
+
+#recipe-left {
+    margin-left: 40px;
+}
+
+#recipe-right {
+    overflow: scroll;
+    overflow-x: hidden;
+    padding-right: 10px;
 }
 
 /*centered header*/
 h2 {
     letter-spacing: 2px;
     text-align: center;
+    font-size: 20px;
 }
 
 /*removed ul styling*/
@@ -248,4 +259,21 @@ button:hover {
     border-color: #6B7C60;
     border: 2px solid #6B7C60;
     cursor: pointer;
+}
+
+.filters-container {
+    
+}
+
+/* need help */
+#categories {
+    flex-wrap: wrap; 
+    display: none;
+    background-color: #E8E7D1;
+    margin-top: 100px;
+    margin-inline: 20px;
+}
+
+.filter-img {
+    height: 150px;
 }
