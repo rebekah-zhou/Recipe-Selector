@@ -171,13 +171,13 @@ flex-direction: row;
     width: 25%;
 }
 
-/*added*/
+
 #side-bar li {
     cursor: pointer;
     list-style: none;
 }
 
-/*added line styling*/
+
 #recipe-hr {
     background-color: #6B7C60;
     color:#6B7C60;
@@ -200,7 +200,17 @@ flex-direction: row;
 
 #recipe-right, #recipe-left {
     width: 50%;
-    margin-left: 30px;
+    
+}
+
+#recipe-left {
+    margin-left: 40px;
+}
+
+#recipe-right {
+    overflow: scroll;
+    overflow-x: hidden;
+    padding-right: 10px;
 }
 
 /*centered header*/
