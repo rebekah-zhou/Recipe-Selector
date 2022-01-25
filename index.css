@@ -9,23 +9,153 @@ html {
 
 #filters {
     text-align: center;
-    margin-top: -170px;
+    margin-top: -160px;
 }
+
+
+header {
+    max-width: 1500px;
+    margin: auto;
+}
+
+
+#container {
+    max-width: 1500px;
+    margin: auto;
+}
+
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    margin-right: 60px;
+    list-style: none;
+}
+
 
 #filters li {
     display: inline-block;
-    padding: 20px;
+    margin-left: 50px;
+    margin-top: 20px;
     font-size: 1.7rem;
+    cursor: pointer;
 }
+
+
+
+#filters li {  
+    position: relative;
+}
+
+
+#filters li::before {
+    content: '';
+    display: block;
+    height: 5px;
+    width: 0%;
+    background-color: #6B7C60;
+    position: absolute;
+    top: 35px;
+    transition: all ease-in-out 200ms;
+}
+
+#filters li:hover::before {
+    width: 100%;
+}
+
 
 #search-container {
     float: right;
-    margin-top: -60px;
+    margin-top: -30px;
     margin-right: 25px;
 }
 
-#recipe-card {
-    
+#search-bar {
+    border-radius: 30px;
+    width: 175px;
+    height: 23px;
+    border-color: #6B7C60;
+}
+
+
+.fa-search {
+    color: #6B7C60;
+    cursor: pointer;
+}
+
+input:focus::placeholder {
+    color: transparent;
+  }
+
+
+label #button,
+label #cancel {
+    font-size: 1.5rem;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    margin-top: -250px;
+    cursor: pointer;
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+
+@media (max-width: 1130px){
+    label #button {
+        display: block;
+        margin-top: -250px;
+        
+    }
+
+    #search-container {
+        margin-top: -170px;
+    }
+
+     nav ul {
+        position: fixed;
+        background-color: rgb(248, 248, 248);
+        width: 100%;
+        height: 100vh;
+        top: 440px;
+        left: -200%;
+        text-align: center;
+        transition: all 750ms;
+        
+    }
+
+    #filters li {
+        display: block;
+        top: 1px;
+        margin: auto;
+        line-height: 0px;
+        padding-top: 70px;
+    }
+
+    #filters li:hover::before {
+        width: 0%;
+    }
+
+    nav ul li {
+        font-size: 1.1rem;
+    }
+
+    #check:checked ~ ul {
+        left: 0;
+    }
+
+    #check:checked ~ label #button {
+        display: none;
+        margin-top: -250px;
+    }
+
+    #check:checked ~ label #cancel {
+        display: block;
+        margin-top: -250px;
+    }
 }
 
 .container {
@@ -34,15 +164,31 @@ flex-direction: row;
 }
 
 .column {
-   margin-top: 100px;
+   margin-top: 200px;
 }
 
 #side-bar {
-    width: 20%;
+    width: 25%;
 }
 
+/*added*/
+#side-bar li {
+    cursor: pointer;
+    list-style: none;
+}
+
+/*added line styling*/
+#recipe-hr {
+    background-color: #6B7C60;
+    color:#6B7C60;
+    height: .05rem;
+    margin-right: 72px;
+    margin-bottom: 20px;
+}
+
+
 #recipe-card {
-    width: 80%;
+    width: 75%;
 }
 
 #recipe-index-card {
@@ -57,14 +203,49 @@ flex-direction: row;
     margin-left: 30px;
 }
 
+/*centered header*/
 h2 {
     letter-spacing: 2px;
+    text-align: center;
 }
+
+/*removed ul styling*/
+div#recipe-right ul li {
+    list-style: none;
+}
+
 
 #selected-img {
     object-fit: cover;
-    max-width: 400px;
-    height: 500px;
+    max-width: 380px;
+    height: 480px;
     margin: auto;
     border-radius: 25px;
+}
+
+/*button styling*/
+
+#button {
+    text-align: center;
+    margin-top: 50px;
+}
+
+button {
+    background-color: #6B7C60;
+    border: none;
+    color: #fff;
+    width: 175px;
+    height: 40px;
+    font-size: .9rem;
+    text-decoration: none;
+    border-color: #fff;
+}
+
+
+button:hover {
+    background-color: #fff;
+    color: #6B7C60;
+    border-color: #6B7C60;
+    border: 2px solid #6B7C60;
+    cursor: pointer;
 }
