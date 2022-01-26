@@ -13,7 +13,7 @@
 </head>
 <body>
     <header>
-        <img src="./images/Recipe.png" id="logo"/>
+        <img src="./images/ezgif.com-gif-maker.gif" id="logo"/>
         <nav>
             <input type="checkbox" id="check" >
                 <label for="check">
@@ -26,17 +26,21 @@
                 <li class="filter-li">Region</li>
             </ul>
             <div id="search-container">
-                <label for="search-bar"></label>
-                <input type="text" id="search-bar" placeholder="  Search recipe by name">
-                <i class="fas fa-search"></i>
+                <form id="search-form">
+                    <label for="search-bar"></label>
+                    <input type="text" id="search-bar" placeholder="  Search recipe by name">
+                    <i class="fas fa-search" id="search-bar-icon"></i>
+                </form>
             </div>
         </nav>
     </header>
-    <div class="container" class="filters-container" id="categories">
-    </div>
-    <div class="container" class="filters-container" id="mainingredient">
-    </div>
-    <div class="container" class="filters-container" id="region">
+    <div id="filters-container-container">
+        <div class="filters-container" id="categories">
+        </div>
+        <div class="filters-container" id="mainingredient">
+        </div>
+        <div class="filters-container" id="region">
+        </div>
     </div>
     <div class='container' id="container">
         <section class='column' id="side-bar">
@@ -58,8 +62,22 @@
                     <div id="recipe-right">
                         <div id='ingredients'>
                             <h2>INGREDIENTS</h2>
-                                <ul id="ingredients-list">
-                                </ul>
+                                <div id="ingredient-ul">
+                                    <div class="ingredient-column">
+                                        <ul id="ingredients-list-1">
+                                        </ul>
+                                    </div>
+                                    <div class="ingredient-column">
+                                        <ul id="ingredients-list-2">
+                                        </ul>
+                                    </div>
+                                    <div class="ingredient-column">
+                                        <div >
+                                        <ul id="ingredients-list-3">
+                                        </ul>
+                                    </div>
+                                </div>
+                                
                         </div>
                         <div id="directions">
                             <h2>DIRECTIONS</h2>
