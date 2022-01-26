@@ -101,7 +101,7 @@ label #cancel {
 }
 
 #check {
-    display: none;
+    display: block;
 }
 
 
@@ -192,9 +192,15 @@ flex-direction: row;
 #recipe-hr {
     background-color: #6B7C60;
     color:#6B7C60;
-    height: .05rem;
+    height: .1rem;
     margin-right: 55px;
     margin-bottom: 20px;
+}
+
+.card-list {
+    list-style-position: inside;
+    padding-left: 13px;
+    justify-content: center;
 }
 
 
@@ -223,6 +229,13 @@ flex-direction: row;
     overflow-x: hidden;
     padding-right: 20px;
     width: 54%;
+}
+
+.right-hr {
+    background-color: #6B7C60;
+    color:#6B7C60;
+    height: .05rem;
+    margin: 10px 55px 20px 55px;
 }
 
 /*centered header*/
