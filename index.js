@@ -1,69 +1,64 @@
 let hide = false;
 
-
-const categoriesUrl = 'http://localhost:3000/categories'
-getFetch(categoriesUrl)
-    .then(categories => {
-        const categoriesDiv = document.querySelector("#categories")
-        categories.forEach(categoryObj => {
-            // want to add something with 
-            // categoryObj.strCategoryDescription
-            const div = document.createElement('div')
-            const span = document.createElement('span')
-            const img = document.createElement('img')
-            span.textContent = categoryObj.strCategory
-            img.src = categoryObj.strCategoryThumb
-            img.alt = categoryObj.strCategory
-            img.className = 'filter-img'
-            div.className = 'filter-div'
-            div.append(span, img)
-            categoriesDiv.append(div)
-        })
-    })
-
-const mainIngredientUrl = 'http://localhost:3000/meals'
-getFetch(mainIngredientUrl)
-    .then(mainIngredient => {
-        const mainIngredientDiv = document.querySelector("#mainingredient")
-        mainIngredient.forEach(ingredientObj => {
-            const div = document.createElement('div')
-            const span = document.createElement('span')
-            const img = document.createElement('img')
-            span.textContent = ingredientObj.strIngredient
-            img.src = `https://www.themealdb.com/images/ingredients/${ingredientObj.strIngredient}.png`
-            img.alt = ingredientObj.strIngredient
-            img.className = 'filter-img'
-            div.className = 'filter-div'
-            div.append(span, img)
-            mainIngredientDiv.append(div)
-        })
-    })
-
-// function createThumbnailElements() {
-//     const div = document.createElement('div')
-//     const span = document.createElement('span')
-//     const img = document.createElement('img')
-//     span.textContent = categoryObj.strCategory
-//     img.src = categoryObj.strCategoryThumb
-//             img.alt = categoryObj.strCategory
-//             img.className = 'filter-img'
-//             div.className = 'category-div'
-//             div.append(span, img)
-//             categoriesDiv.append(div)
-// }
+loadCategoriesMenu();
+loadMainIngredientsMenu();
+makeFiltersEventListener();
 
 function getFetch(url) {
     return fetch(url)
             .then(res => res.json())
 }
 
-const filters = document.querySelectorAll(".filter-li")
-filters.forEach(filter => {
-    filter.addEventListener('click', e => {
+function loadCategoriesMenu() {
+    const categoriesUrl = 'http://localhost:3000/categories'
+    getFetch(categoriesUrl)
+    .then(categories => {
+        categories.forEach(categoryObj => {
+            const {strCategory, strCategoryThumb} = categoryObj
+            createThumbnailElements("categories", strCategory, strCategoryThumb)
+        })
+    })
+}
+
+function loadMainIngredientsMenu() {
+    const mainIngredientUrl = 'http://localhost:3000/meals'
+    getFetch(mainIngredientUrl)
+    .then(mainIngredient => {
+        mainIngredient.forEach(ingredientObj => {
+            const {strIngredient} = ingredientObj
+            createThumbnailElements("mainingredient", strIngredient, `https://www.themealdb.com/images/ingredients/${strIngredient}.png`)
+        })
+    })
+}
+
+function loadRegionMenu() {
+    const regionUrl = ''
+}
+
+function createThumbnailElements(filter, name, image) {
+    const filterDiv = document.querySelector(`#${filter}`)
+    const div = document.createElement('div')
+    const span = document.createElement('span')
+    const img = document.createElement('img')
+    span.textContent = name
+    img.src = image
+    img.alt = name
+    img.className = 'filter-img'
+    div.className = 'filter-div'
+    div.append(span, img)
+    filterDiv.append(div)
+}
+
+function makeFiltersEventListener() {
+    const filters = document.querySelectorAll(".filter-li")
+    filters.forEach(filter => {
+        filter.addEventListener('click', e => {
         const aFilter = e.target.textContent.toLowerCase().replace(/\s+/g, '')
         toggleHiddenContainer(aFilter)
+        })
     })
-})
+}
+
 
 function toggleHiddenContainer(specificFilter) {
     const specificFilterContainer = document.querySelector(`#${specificFilter}`)
