@@ -2,6 +2,7 @@ let hide = false;
 
 loadCategoriesMenu();
 loadMainIngredientsMenu();
+loadRegionMenu();
 makeFiltersEventListener();
 
 function getFetch(url) {
@@ -17,6 +18,7 @@ function loadCategoriesMenu() {
             const {strCategory, strCategoryThumb} = categoryObj
             createThumbnailElements("categories", strCategory, strCategoryThumb)
         })
+        makeMenuEventListener("categories", "c")
     })
 }
 
@@ -28,11 +30,25 @@ function loadMainIngredientsMenu() {
             const {strIngredient} = ingredientObj
             createThumbnailElements("mainingredient", strIngredient, `https://www.themealdb.com/images/ingredients/${strIngredient}.png`)
         })
+        makeMenuEventListener("mainingredient", "i")
     })
 }
 
 function loadRegionMenu() {
-    const regionUrl = ''
+    const regionUrl = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list'
+    getFetch(regionUrl)
+    .then(data => {
+        data.meals.forEach(area => {
+            const {strArea} = area
+            const specificRegionUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${strArea}`
+            getFetch(specificRegionUrl)
+            .then(data => {
+                const areaImg = data.meals[0].strMealThumb
+                createThumbnailElements("region", strArea, areaImg)
+                makeRegionMenuEventListener(data)
+            })
+        })
+    })
 }
 
 function createThumbnailElements(filter, name, image) {
@@ -43,18 +59,45 @@ function createThumbnailElements(filter, name, image) {
     span.textContent = name
     img.src = image
     img.alt = name
-    img.className = 'filter-img'
+    img.className = `${filter}-img`
     div.className = 'filter-div'
     div.append(span, img)
     filterDiv.append(div)
 }
 
 function makeFiltersEventListener() {
-    const filters = document.querySelectorAll(".filter-li")
-    filters.forEach(filter => {
+    const filtersLi = document.querySelectorAll(".filter-li")
+    filtersLi.forEach(filter => {
         filter.addEventListener('click', e => {
         const aFilter = e.target.textContent.toLowerCase().replace(/\s+/g, '')
         toggleHiddenContainer(aFilter)
+        })
+    })
+}
+
+function makeRegionMenuEventListener(meal) {
+    const filterDivs = document.querySelectorAll(`#region .filter-div`)
+        filterDivs[filterDivs.length - 1].addEventListener('click', e => {
+            console.log(e.target)
+            renderSideBar(meal)
+            const firstMealId = meal.meals[0].idMeal
+            getFetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${firstMealId}`)
+            .then(mealObj => renderCenter(mealObj))
+        })
+}
+
+function makeMenuEventListener(filter, filterLetter) {
+    const filterDivs = document.querySelectorAll(`#${filter} .filter-div`)
+    filterDivs.forEach(div => {
+        div.addEventListener('click', e => {
+            const filterUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?${filterLetter}=${e.target.alt}`
+            getFetch(filterUrl)
+            .then(meal => {
+                renderSideBar(meal)
+                const firstMealId = meal.meals[0].idMeal
+                getFetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${firstMealId}`)
+                .then(mealObj => renderCenter(mealObj))
+            })
         })
     })
 }
