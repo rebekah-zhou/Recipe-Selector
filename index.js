@@ -1,22 +1,56 @@
-
 let hide = false;
 
 
 const categoriesUrl = 'http://localhost:3000/categories'
 getFetch(categoriesUrl)
-    .then(data => {
+    .then(categories => {
         const categoriesDiv = document.querySelector("#categories")
-        data.forEach(categoryObj => {
-            const a = document.createElement('a')
+        categories.forEach(categoryObj => {
+            // want to add something with 
+            // categoryObj.strCategoryDescription
+            const div = document.createElement('div')
+            const span = document.createElement('span')
             const img = document.createElement('img')
-            a.textContent = categoryObj.strCategory
-            a.href = ""
+            span.textContent = categoryObj.strCategory
             img.src = categoryObj.strCategoryThumb
+            img.alt = categoryObj.strCategory
             img.className = 'filter-img'
-            a.append(img)
-            categoriesDiv.append(a)
+            div.className = 'filter-div'
+            div.append(span, img)
+            categoriesDiv.append(div)
         })
     })
+
+const mainIngredientUrl = 'http://localhost:3000/meals'
+getFetch(mainIngredientUrl)
+    .then(mainIngredient => {
+        const mainIngredientDiv = document.querySelector("#mainingredient")
+        mainIngredient.forEach(ingredientObj => {
+            const div = document.createElement('div')
+            const span = document.createElement('span')
+            const img = document.createElement('img')
+            span.textContent = ingredientObj.strIngredient
+            img.src = `https://www.themealdb.com/images/ingredients/${ingredientObj.strIngredient}.png`
+            img.alt = ingredientObj.strIngredient
+            img.className = 'filter-img'
+            div.className = 'filter-div'
+            div.append(span, img)
+            mainIngredientDiv.append(div)
+        })
+    })
+
+// function createThumbnailElements() {
+//     const div = document.createElement('div')
+//     const span = document.createElement('span')
+//     const img = document.createElement('img')
+//     span.textContent = categoryObj.strCategory
+//     img.src = categoryObj.strCategoryThumb
+//             img.alt = categoryObj.strCategory
+//             img.className = 'filter-img'
+//             div.className = 'category-div'
+//             div.append(span, img)
+//             categoriesDiv.append(div)
+// }
 
 function getFetch(url) {
     return fetch(url)

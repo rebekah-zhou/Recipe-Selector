@@ -273,15 +273,51 @@ button:hover {
 
 
 
+
+#filters-container-container {
+    margin: auto;
+    width: 45%;
+}
+
+.filters-container {
+    background-color: #E8E7D1;
+    margin-top: 60px;
+    padding: 20px;
+    justify-content: center;
+}
+
+
 /* need help */
 #categories {
+    height: 380px;
+    width: 650px;
     flex-wrap: wrap; 
+    flex-direction: row;
     display: none;
     background-color: #E8E7D1;
     margin-top: 100px;
-    margin-inline: 20px;
+    padding: 20px;
+}
+
+#mainingredient {
+    height: 380px;
+    width: 700px;
+    flex-wrap: wrap; 
+    flex-direction: row;
+    display: none;
+    background-color: #E8E7D1;
+    margin-top: 100px;
+    padding: 20px;
 }
 
 .filter-img {
-    height: 150px;
+    height: 100px;
+}
+
+.filter-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
 }
