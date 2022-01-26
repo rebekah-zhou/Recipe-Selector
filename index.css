@@ -22,6 +22,7 @@ header {
 #container {
     max-width: 1500px;
     margin: auto;
+    
 }
 
 
@@ -181,6 +182,10 @@ flex-direction: row;
     font-family: 'Cedarville Cursive', cursive;
     margin-bottom: -3px;
     font-size: 1.7rem;
+    width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 
@@ -214,7 +219,7 @@ flex-direction: row;
 }
 
 #recipe-right {
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
     padding-right: 20px;
     width: 54%;
@@ -247,6 +252,7 @@ div#recipe-right ul li {
     height: 480px;
     margin: auto;
     border-radius: 25px;
+    
 }
 
 /*button styling*/
@@ -279,42 +285,51 @@ button:hover {
 
 
 #filters-container-container {
+    max-width: 1510px;
     margin: auto;
-    width: 45%;
 }
 
 .filters-container {
-    background-color: #E8E7D1;
-    margin-top: 60px;
+    background-color: #fff;
     padding: 20px;
     justify-content: center;
-    /* suggestion */
-    max-width: 1500px;
-    margin: auto;
+   
 }
 
 
 /* need help */
 #categories {
     height: 380px;
-    width: 650px;
+    width: 1500px;
     flex-wrap: wrap; 
     flex-direction: row;
     display: none;
-    background-color: #E8E7D1;
+    background-color: rgba(255, 255, 255, 0.686);
     margin-top: 100px;
     padding: 20px;
+    border-bottom: 5px groove #6b7c608c;
+    position: fixed;
+    backdrop-filter: blur(5px);
 }
+
 
 #mainingredient {
     height: 380px;
-    width: 700px;
+    width: 1500px;
     flex-wrap: wrap; 
     flex-direction: row;
     display: none;
-    background-color: #E8E7D1;
+    background-color: rgba(255, 255, 255, 0.604);
     margin-top: 100px;
     padding: 20px;
+    border-bottom: 5px groove #6b7c608c;
+    position: fixed;
+    backdrop-filter: blur(5px);
+}
+
+.filter-div {
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .filter-img {
