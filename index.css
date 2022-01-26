@@ -168,7 +168,7 @@ flex-direction: row;
 }
 
 #side-bar {
-    width: 25%;
+    width: 20%;
 }
 
 
@@ -177,18 +177,24 @@ flex-direction: row;
     list-style: none;
 }
 
+#recipe-name {
+    font-family: 'Cedarville Cursive', cursive;
+    margin-bottom: -3px;
+    font-size: 1.7rem;
+}
+
 
 #recipe-hr {
     background-color: #6B7C60;
     color:#6B7C60;
     height: .05rem;
-    margin-right: 72px;
+    margin-right: 55px;
     margin-bottom: 20px;
 }
 
 
 #recipe-card {
-    width: 75%;
+    width: 80%;
 }
 
 #recipe-index-card {
@@ -248,7 +254,7 @@ div#recipe-right ul li {
 #button {
     text-align: center;
     margin-top: 50px;
-    margin-left: 280px;
+    margin-left: 230px;
 }
 
 button {
@@ -272,8 +278,6 @@ button:hover {
 }
 
 
-
-
 #filters-container-container {
     margin: auto;
     width: 45%;
@@ -284,6 +288,9 @@ button:hover {
     margin-top: 60px;
     padding: 20px;
     justify-content: center;
+    /* suggestion */
+    max-width: 1500px;
+    margin: auto;
 }
 
 
@@ -320,4 +327,20 @@ button:hover {
     justify-content: center;
     align-content: center;
     text-align: center;
+}
+
+#recipe-list {
+    list-style-position: inside;
+    padding-left: 0;
+    
+}
+
+.recipes-list {
+    padding-bottom: 20px;
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+.recipes-list:hover {
+    color: #6B7C60;
 }

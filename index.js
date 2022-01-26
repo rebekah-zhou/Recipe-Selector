@@ -100,7 +100,9 @@ searchBarIcon.addEventListener('click', (e) => {
     .then(res => res.json())
     .then(meal => {
         renderCenter(meal)
+        renderSideBar(meal)
     })
+
     form.reset()
 })
 
@@ -110,9 +112,13 @@ form.addEventListener('submit', (e) => {
     .then(res => res.json())
     .then(meal => {
         renderCenter(meal)
+        renderSideBar(meal)
     })
+
     form.reset()
 })
+
+
 
 function renderCenter(meal) {
     const mealObject = meal.meals[0]
@@ -147,7 +153,6 @@ function renderCenter(meal) {
     
     const ingredientsList = newArray.filter(item => item.length > 3 && item !== 'null  null'
      && item !== '  null')
-    console.log(newArray)
 
     
     while(selectedIngedients1.firstChild) {
@@ -173,8 +178,30 @@ function renderCenter(meal) {
         } else {
             selectedIngedients1.appendChild(ingredientLi)
         }
-        
-        console.log(ingredientsList.length)
     })
 }
 
+function renderSideBar(meals) {
+    const selectedMealsArray = meals.meals
+    const sideBarUl = document.getElementById('recipe-list')
+
+    while(sideBarUl.firstChild) {
+        sideBarUl.removeChild(sideBarUl.firstChild)
+    }
+
+    selectedMealsArray.forEach(meal => {
+        const currentRecipesLi = document.createElement('li')
+        currentRecipesLi.setAttribute('class', "recipes-list")
+        currentRecipesLi.innerText = meal.strMeal
+
+        currentRecipesLi.addEventListener('click', (e) => {
+            fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=` + `${e.target.innerText}`)
+            .then(res => res.json())
+            .then(meal => {
+                renderCenter(meal)
+            })
+
+        })
+        sideBarUl.appendChild(currentRecipesLi)
+    })
+}
