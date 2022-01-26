@@ -206,6 +206,7 @@ function renderCenter(meal) {
 
     ingredientsList.forEach(ingredient => {
         const ingredientLi = document.createElement('li')
+        const checkbox = document.createElement('input')
         idCounter = idCounter ++
         ingredientLi.innerText = ingredient
         ingredientLi.setAttribute('id', idCounter ++)
