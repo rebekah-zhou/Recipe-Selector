@@ -296,8 +296,6 @@ button:hover {
    
 }
 
-
-/* need help */
 #categories {
     height: 380px;
     width: 1500px;
@@ -332,8 +330,23 @@ button:hover {
     padding-right: 30px;
 }
 
-.filter-img {
+#region {
+    height: 380px;
+    width: 700px;
+    flex-wrap: wrap; 
+    flex-direction: row;
+    display: none;
+    background-color: #E8E7D1;
+    margin-top: 100px;
+    padding: 20px;
+}
+
+.categories-img, .mainingredient-img, .region-img {
     height: 100px;
+}
+
+.region-img {
+    border-radius: 50px;
 }
 
 .filter-div {
