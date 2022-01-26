@@ -39,12 +39,16 @@ function toggleHiddenContainer(specificFilter) {
     } else {
         specificFilterContainer.style.display = "none"
     }
+}
 
 const randomMeal = ('https://www.themealdb.com/api/json/v1/1/random.php')
 const randomMealButton = document.getElementById('random-meal-button')
+const searchBar = document.getElementById('search-bar')
+const searchBarIcon = document.getElementById('search-bar-icon')
+const form = document.getElementById('search-form')
 
 fetch(randomMeal)
-.then(res => res.json())
+.then (res => res.json())
 .then(meal => {
     renderCenter(meal)
 })
@@ -57,11 +61,32 @@ randomMealButton.addEventListener('click', () => {
   })
 })
 
+searchBarIcon.addEventListener('click', (e) => {
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=` + `${searchBar.value}`)
+    .then(res => res.json())
+    .then(meal => {
+        renderCenter(meal)
+    })
+    form.reset()
+})
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=` + `${searchBar.value}`)
+    .then(res => res.json())
+    .then(meal => {
+        renderCenter(meal)
+    })
+    form.reset()
+})
+
 function renderCenter(meal) {
     const mealObject = meal.meals[0]
     const selectedName = document.getElementById('recipe-name')
     const selectedImage = document.getElementById('selected-img')
-    const selectedIngedients = document.getElementById('ingredients-list')
+    const selectedIngedients1 = document.getElementById('ingredients-list-1')
+    const selectedIngedients2 = document.getElementById('ingredients-list-2')
+    const selectedIngedients3 = document.getElementById('ingredients-list-3')
     const instructions = document.getElementById('instructions')
 
 
@@ -91,13 +116,31 @@ function renderCenter(meal) {
     console.log(newArray)
 
     
-    while(selectedIngedients.firstChild) {
-        selectedIngedients.removeChild(selectedIngedients.firstChild);
+    while(selectedIngedients1.firstChild) {
+        selectedIngedients1.removeChild(selectedIngedients1.firstChild);
     }
-    
+    while(selectedIngedients2.firstChild) {
+        selectedIngedients2.removeChild(selectedIngedients2.firstChild);
+    }
+    while(selectedIngedients3.firstChild) {
+        selectedIngedients3.removeChild(selectedIngedients3.firstChild);
+    }
+    let idCounter = 1;
+
     ingredientsList.forEach(ingredient => {
         const ingredientLi = document.createElement('li')
+        idCounter = idCounter ++
         ingredientLi.innerText = ingredient
-        selectedIngedients.appendChild(ingredientLi)
+        ingredientLi.setAttribute('id', idCounter ++)
+        if(ingredientLi.getAttribute('id') % 3 === 0) {
+            selectedIngedients3.appendChild(ingredientLi)
+        } else if(ingredientLi.getAttribute('id') % 2 === 0) {
+            selectedIngedients2.appendChild(ingredientLi)
+        } else {
+            selectedIngedients1.appendChild(ingredientLi)
+        }
+        
+        console.log(ingredientsList.length)
     })
 }
+
