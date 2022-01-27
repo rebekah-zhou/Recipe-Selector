@@ -368,12 +368,13 @@ function renderSideBar(meals) {
         currentRecipesLi.innerText = meal.strMeal
 
         currentRecipesLi.addEventListener('click', (e) => {
-            fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=` + `${e.target.innerText}`)
-            .then(res => res.json())
-            .then(meal => {
-                renderCenter(meal)
-            })
-
+           // console.log(e.target.innerText.replace(/&/g, 'and'))
+                console.log(item)
+                fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=${e.target[idMeal]}`)
+                .then(res => res.json())
+                .then(meal => {
+                    renderCenter(meal)
+                })
         })
         sideBarUl.appendChild(currentRecipesLi)
     })
