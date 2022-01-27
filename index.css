@@ -64,6 +64,45 @@ nav ul {
 }
 
 
+
+/* .hidden-description {
+    width: 600px;
+    margin: auto;
+    left: 300px;
+    position: relative;
+    margin-top: 10px;
+    display: none;
+}
+
+.hidden-description q {
+    text-align: center;
+    font-size: 0.8rem
+} */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 500px;
+    background-color: #E8DDD1;
+    color:black;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -250px;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+  }
+
 #search-container {
     float: right;
     margin-top: -30px;
