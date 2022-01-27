@@ -1,4 +1,3 @@
-let hide = false;
 
 loadCategoriesMenu();
 loadMainIngredientsMenu();
@@ -66,14 +65,56 @@ function createThumbnailElements(filter, name, image) {
 }
 
 function makeFiltersEventListener() {
+    document.addEventListener('click', e => toggleHiddenContainer(), false)
     const filtersLi = document.querySelectorAll(".filter-li")
     filtersLi.forEach(filter => {
         filter.addEventListener('click', e => {
         const aFilter = e.target.textContent.toLowerCase().replace(/\s+/g, '')
         toggleHiddenContainer(aFilter)
+        e.stopPropagation();
         })
-    })
+    }, true)
 }
+
+const hideMenuObj = {
+    categories: true,
+    mainingredient: true,
+    region: true
+}
+
+function toggleHiddenContainer(specificFilter = "") {
+    for (const filter in hideMenuObj) {
+        if (filter === specificFilter) {
+            hideMenuObj[filter] = false
+        } else {
+            hideMenuObj[filter] = true
+        }
+    }
+    console.log(hideMenuObj)
+    for (const filter in hideMenuObj) {
+        const filterContainer = document.querySelector(`#${filter}`)
+        if (!hideMenuObj[filter]) {
+            filterContainer.style.display = "flex"
+        } else {
+            filterContainer.style.display = "none"
+        }
+    }
+}
+
+// function hideOnClickOutside(element) {
+//     const outsideClickListener = e => {
+//         if (e.target.closest(selector) === null) {
+//             element.style.display = 'none'
+//             removeClickListener()
+//         }
+//     }
+
+//     const removeClickListener = () => {
+//         document.removeEventListener('click', outsideClickListener)
+//     }
+
+//     document.addEventListener('click', outsideClickListener)
+// }
 
 function makeRegionMenuEventListener(meal) {
     const filterDivs = document.querySelectorAll(`#region .filter-div`)
@@ -100,17 +141,6 @@ function makeMenuEventListener(filter, filterLetter) {
             })
         })
     })
-}
-
-
-function toggleHiddenContainer(specificFilter) {
-    const specificFilterContainer = document.querySelector(`#${specificFilter}`)
-    hide =! hide
-    if (hide) {
-        specificFilterContainer.style.display = "flex"
-    } else {
-        specificFilterContainer.style.display = "none"
-    }
 }
 
 const randomMeal = ('https://www.themealdb.com/api/json/v1/1/random.php')
