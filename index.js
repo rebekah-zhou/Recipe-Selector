@@ -118,11 +118,19 @@ const randomMealButton = document.getElementById('random-meal-button')
 const searchBar = document.getElementById('search-bar')
 const searchBarIcon = document.getElementById('search-bar-icon')
 const form = document.getElementById('search-form')
+const recipeListTitle = document.getElementById('recipe-list-title')
 
 fetch(randomMeal)
 .then (res => res.json())
 .then(meal => {
     renderCenter(meal)
+    // console.log(meal.meals[0]['strCategory'])
+    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=` + `${meal.meals[0]['strArea']}`)
+    .then(res => res.json())
+    .then(meals => {
+        renderSideBar(meals)
+    })
+    recipeListTitle.innerText = `More ${meal.meals[0]['strArea']} recipes:`
 })
 
 randomMealButton.addEventListener('click', () => {
@@ -130,6 +138,13 @@ randomMealButton.addEventListener('click', () => {
     .then(res => res.json())
     .then(meal => {
     renderCenter(meal)
+
+    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=` + `${meal.meals[0]['strArea']}`)
+    .then(res => res.json())
+    .then(meals => {
+        renderSideBar(meals)
+    })
+    recipeListTitle.innerText = `More ${meal.meals[0]['strArea']} recipes:`
   })
 })
 
@@ -140,7 +155,7 @@ searchBarIcon.addEventListener('click', (e) => {
         renderCenter(meal)
         renderSideBar(meal)
     })
-
+    recipeListTitle.innerText = `More "${searchBar.value}" recipes:`
     form.reset()
 })
 
@@ -152,7 +167,7 @@ form.addEventListener('submit', (e) => {
         renderCenter(meal)
         renderSideBar(meal)
     })
-
+    recipeListTitle.innerText = `More "${searchBar.value}" recipes:`
     form.reset()
 })
 
