@@ -14,8 +14,8 @@ function loadCategoriesMenu() {
     getFetch(categoriesUrl)
     .then(categories => {
         categories.forEach(categoryObj => {
-            const {strCategory, strCategoryThumb} = categoryObj
-            createThumbnailElements("categories", strCategory, strCategoryThumb)
+            const {strCategory, strCategoryThumb, strCategoryDescription} = categoryObj
+            createThumbnailElements("categories", strCategory, strCategoryThumb, strCategoryDescription)
         })
         makeMenuEventListener("categories", "c")
     })
@@ -26,8 +26,8 @@ function loadMainIngredientsMenu() {
     getFetch(mainIngredientUrl)
     .then(mainIngredient => {
         mainIngredient.forEach(ingredientObj => {
-            const {strIngredient} = ingredientObj
-            createThumbnailElements("mainingredient", strIngredient, `https://www.themealdb.com/images/ingredients/${strIngredient}.png`)
+            const {strIngredient, strDescription} = ingredientObj
+            createThumbnailElements("mainingredient", strIngredient, `https://www.themealdb.com/images/ingredients/${strIngredient}.png`, strDescription)
         })
         makeMenuEventListener("mainingredient", "i")
     })
@@ -50,19 +50,36 @@ function loadRegionMenu() {
     })
 }
 
-function createThumbnailElements(filter, name, image) {
+function createThumbnailElements(filter, name, image, description) {
     const filterDiv = document.querySelector(`#${filter}`)
     const div = document.createElement('div')
-    const span = document.createElement('span')
+    const spanName = document.createElement('span')
     const img = document.createElement('img')
-    span.textContent = name
+    const spanDesc = document.createElement('span')
+    spanName.textContent = name
+    spanDesc.textContent = description
+    spanDesc.className = "tooltip-text"
     img.src = image
     img.alt = name
-    img.className = `${filter}-img`
+    img.setAttribute("class", `${filter}-img tooltip`)
     div.className = 'filter-div'
-    div.append(span, img)
+    img.append(spanDesc)
+    div.append(spanName, img)
     filterDiv.append(div)
+   // showDescriptionOnMouseover(div, description)
 }
+
+// function showDescriptionOnMouseover (div, description) {
+//     const hiddenDescriptionDiv = document.querySelector('.hidden-description')
+//     div.addEventListener('mouseover', e => {
+//         const q = document.querySelector('q')
+//         q.textContent = description
+//         hiddenDescriptionDiv.style.display = 'flex'
+//     })
+//     div.addEventListener('mouseout', () => {
+//         hiddenDescriptionDiv.style.display = 'none'
+//     })
+// }
 
 function makeFiltersEventListener() {
     document.addEventListener('click', e => toggleHiddenContainer(), false)
@@ -90,7 +107,6 @@ function toggleHiddenContainer(specificFilter = "") {
             hideMenuObj[filter] = true
         }
     }
-    console.log(hideMenuObj)
     for (const filter in hideMenuObj) {
         const filterContainer = document.querySelector(`#${filter}`)
         if (!hideMenuObj[filter]) {
@@ -100,21 +116,6 @@ function toggleHiddenContainer(specificFilter = "") {
         }
     }
 }
-
-// function hideOnClickOutside(element) {
-//     const outsideClickListener = e => {
-//         if (e.target.closest(selector) === null) {
-//             element.style.display = 'none'
-//             removeClickListener()
-//         }
-//     }
-
-//     const removeClickListener = () => {
-//         document.removeEventListener('click', outsideClickListener)
-//     }
-
-//     document.addEventListener('click', outsideClickListener)
-// }
 
 function makeRegionMenuEventListener(meal) {
     const filterDivs = document.querySelectorAll(`#region .filter-div`)
