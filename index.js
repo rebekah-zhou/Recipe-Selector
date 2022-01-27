@@ -61,9 +61,10 @@ function createThumbnailElements(filter, name, image, description) {
     spanDesc.className = "tooltip-text"
     img.src = image
     img.alt = name
-    img.setAttribute("class", `${filter}-img tooltip`)
+    img.setAttribute("class", `${filter}-img`)
+    spanName.setAttribute('class', 'tooltip')
     div.className = 'filter-div'
-    img.append(spanDesc)
+    
     div.append(spanName, img)
     filterDiv.append(div)
    // showDescriptionOnMouseover(div, description)
@@ -196,28 +197,58 @@ randomMealButton.addEventListener('click', () => {
     recipeListTitle.innerText = `More ${meal.meals[0]['strArea']} Recipes:`
   })
 })
-
+let newValue = true;
 searchBarIcon.addEventListener('click', (e) => {
+    
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=` + `${searchBar.value}`)
     .then(res => res.json())
     .then(meal => {
+        try {
         renderCenter(meal)
         renderSideBar(meal)
+        newValue = true;
+      } catch {
+        console.log('why did you type stupid shit?')
+        newValue = false;
+      }
+      if(newValue === true && meal.meals.length === 1) {
+        recipeListTitle.innerText = `Found ${searchBar.value}!`
+        } else if (newValue === true) { 
+            recipeListTitle.innerText = `More "${searchBar.value}" Recipes:`
+        } else {
+            recipeListTitle.innerText = `"${searchBar.value}" is not a valid recipe name`
+            newValue = true
+        }
+        form.reset()
     })
-    recipeListTitle.innerText = `More "${searchBar.value}" Recipes:`
-    form.reset()
+    
+    
 })
+console.log(newValue)
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=` + `${searchBar.value}`)
     .then(res => res.json())
     .then(meal => {
+        try {
         renderCenter(meal)
         renderSideBar(meal)
+        newValue = true;
+      } catch {
+        console.log('why did you type stupid shit?')
+        newValue = false;
+      }
+      if(newValue === true && meal.meals.length === 1) {
+        recipeListTitle.innerText = `Found ${searchBar.value}!`
+        } else if (newValue === true) { 
+            recipeListTitle.innerText = `More "${searchBar.value}" Recipes:`
+        } else {
+            recipeListTitle.innerText = `"${searchBar.value}" is not a valid recipe name`
+            newValue = true
+        }
+        form.reset()
     })
-    recipeListTitle.innerText = `More "${searchBar.value}" Recipes:`
-    form.reset()
 })
 
 
@@ -235,9 +266,9 @@ addToList.addEventListener('click', () => {
         const recipeListLi = document.createElement('li')
         const span = document.createElement('span')
         const check = document.createElement('input')
-        // const deleteBtn = document.createElement('button')
-        // deleteBtn.setAttribute('class', 'delete-button')
-        // deleteBtn.innerText = 'x'
+        const deleteBtn = document.createElement('button')
+        deleteBtn.setAttribute('class', 'delete-button')
+        deleteBtn.innerText = 'x'
         check.setAttribute('class', 'check-box')
         check.setAttribute('type', 'checkbox')
         recipeListLi.setAttribute('class', 'list-items')
@@ -253,7 +284,7 @@ addToList.addEventListener('click', () => {
             confirmation.style.display = "none"
             addToList.style.display = "block"
         }, 1200)
-        console.log(ingredients)
+        console.log(ingredients[ingredient].innerText)
     }
 })
 
