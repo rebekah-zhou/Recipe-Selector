@@ -99,8 +99,8 @@ label #cancel {
     display: none;
 }
 
-#check {
-    display: none;
+#check-box {
+    margin-top: -10px;
 }
 
 
@@ -295,7 +295,7 @@ button:hover {
     background-color: #fff;
     color: #6B7C60;
     border-color: #6B7C60;
-    border: 2px solid #6B7C60;
+    border: 1px solid #6B7C60;
     cursor: pointer;
 }
 
@@ -426,21 +426,18 @@ button:hover {
 .fa-shopping-basket {
     color: #6B7C60;
     font-size: 2rem;
-    margin-left: 1050px;
-    position: absolute;
+    margin-left: 36px;
+    margin-top: 10px;
+    position: static;
 }
 
-.fa-shopping-basket:hover {
-    font-size: 2.2rem;
-    cursor: pointer;
-}
 
 .fa-plus {
     color: #6B7C60;
     font-size: 2rem;
-    margin-left: 1054px;
-    position: absolute;
-    margin-top: 45px;
+    margin-left: 40px;
+    position: static;
+    margin-top: 20px;
     display: block;
 }
 
@@ -452,15 +449,28 @@ button:hover {
 .fa-check-circle {
     color: #42a202;
     font-size: 3rem;
-    margin-left: 1045px;
+    margin-left: 30px;
     position: absolute;
-    margin-top: 45px;
+    margin-top: 20px;
     display: none;
+}
+
+
+.delete-button {
+    background-color: #6B7C60;
+    display: none;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    font-size: .9rem;
+    text-decoration: none;
+    border-color: #fff;
 }
 
 #shopping-list-header {
     padding: 0px 0px 0px 30px;
 }
+
 
 .modal {
     display: none; 
