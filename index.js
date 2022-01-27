@@ -173,7 +173,6 @@ fetch(randomMeal)
 .then (res => res.json())
 .then(meal => {
     renderCenter(meal)
-    // console.log(meal.meals[0]['strCategory'])
     fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=` + `${meal.meals[0]['strArea']}`)
     .then(res => res.json())
     .then(meals => {
@@ -365,15 +364,26 @@ function renderSideBar(meals) {
     selectedMealsArray.forEach(meal => {
         const currentRecipesLi = document.createElement('li')
         currentRecipesLi.setAttribute('class', "recipes-list")
-        currentRecipesLi.innerText = meal.strMeal
+        const capitalizedNameArr = meal.strMeal.split(' ')
+        const newCapitalizedNameArr = capitalizedNameArr.map(word => {
+            if (word !== 'and' && word !== 'with'  && word !== '') {
+                if(word[0] === "(" || word[0] === ")") {
+                    word = word[0] + word[1].toUpperCase() + word.slice(2)
+                } else {
+                    word = word[0].toUpperCase() + word.slice(1)
+                }
+                return word
+            }
+        })
+        const capitalizedName = newCapitalizedNameArr.join(' ')
+        currentRecipesLi.innerText = capitalizedName
 
         currentRecipesLi.addEventListener('click', (e) => {
-           // console.log(e.target.innerText.replace(/&/g, 'and'))
-                console.log(item)
-                fetch(`www.themealdb.com/api/json/v1/1/lookup.php?i=${e.target[idMeal]}`)
-                .then(res => res.json())
-                .then(meal => {
-                    renderCenter(meal)
+                meals.meals.forEach(item => {
+                    if (e.target.textContent === item.strMeal) {
+                        getFetch(`https:/www.themealdb.com/api/json/v1/1/lookup.php?i=${item.idMeal}`)
+                        .then(renderCenter)
+                    }
                 })
         })
         sideBarUl.appendChild(currentRecipesLi)
