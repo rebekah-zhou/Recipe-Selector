@@ -45,13 +45,30 @@
     </div>
     <div class='container' id="container">
         <section class='column' id="side-bar">
-            <h3 id="recipe-list-title">Recipes:</h2>
+            <h3 id="recipe-list-title">Recipes:</h3>
             <ul id="recipe-list">
             
             </ul>
             
         </section>
         <section class='column' id="main-section">
+            <div>
+                <i class="fas fa-shopping-basket" id="shopping-list"></i>
+                <i class="fas fa-plus" id="add-to-list"></i>
+                <i class="fas fa-check-circle" id="confirmation"></i>
+            </div>
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content" id="modal-div">
+                  <span class="close">&times;</span>
+                  <h3 id="shopping-list-header">Shopping List:</h3>
+                  <ul id="ingedients-shopping-list">
+                  </ul>
+                  <button id="print">Print</button>
+                </div>
+              
+              </div>
             <div id="recipe-card">
                 <div class="container" id="recipe-index-card">
                     <div id="recipe-left">
@@ -82,18 +99,16 @@
                                         </ul>
                                     </div>
                                 </div>
-                                
                         </div>
+                        
                         <div id="directions">
                             <h2>DIRECTIONS</h2>
                             <hr class="right-hr">
                                 <p id="instructions"></p>
                         </div>
                     </div>
-                
-                </div>
+                </div> 
             </div>
-
             <div id="button">
                 <button id="random-meal-button">Random Recipe</button>
             </div>

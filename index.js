@@ -119,11 +119,17 @@ function toggleHiddenContainer(specificFilter = "") {
 function makeRegionMenuEventListener(meal) {
     const filterDivs = document.querySelectorAll(`#region .filter-div`)
         filterDivs[filterDivs.length - 1].addEventListener('click', e => {
-            console.log(e.target)
+            
             renderSideBar(meal)
             const firstMealId = meal.meals[0].idMeal
             getFetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${firstMealId}`)
             .then(mealObj => renderCenter(mealObj))
+            
+            fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${meal.meals[0]['strMeal']}`)
+            .then(res => res.json())
+            .then(data => {
+            recipeListTitle.innerText = `More ${data.meals[0]['strArea']} Recipes:`
+          })
         })
 }
 
@@ -138,6 +144,7 @@ function makeMenuEventListener(filter, filterLetter) {
                 const firstMealId = meal.meals[0].idMeal
                 getFetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${firstMealId}`)
                 .then(mealObj => renderCenter(mealObj))
+                recipeListTitle.innerText = `More ${div.innerText} Recipes:`
             })
         })
     })
@@ -149,6 +156,15 @@ const searchBar = document.getElementById('search-bar')
 const searchBarIcon = document.getElementById('search-bar-icon')
 const form = document.getElementById('search-form')
 const recipeListTitle = document.getElementById('recipe-list-title')
+const selectedIngedients1 = document.getElementById('ingredients-list-1')
+const selectedIngedients2 = document.getElementById('ingredients-list-2')
+const selectedIngedients3 = document.getElementById('ingredients-list-3')
+const modal = document.getElementById('myModal')
+const shoppingCartIcon = document.getElementById('shopping-list')
+const addToList = document.getElementById('add-to-list')
+const span = document.getElementsByClassName("close")[0];
+const confirmation = document.getElementById('confirmation')
+
 
 fetch(randomMeal)
 .then (res => res.json())
@@ -160,7 +176,7 @@ fetch(randomMeal)
     .then(meals => {
         renderSideBar(meals)
     })
-    recipeListTitle.innerText = `More ${meal.meals[0]['strArea']} recipes:`
+    recipeListTitle.innerText = `More ${meal.meals[0]['strArea']} Recipes:`
 })
 
 randomMealButton.addEventListener('click', () => {
@@ -174,7 +190,7 @@ randomMealButton.addEventListener('click', () => {
     .then(meals => {
         renderSideBar(meals)
     })
-    recipeListTitle.innerText = `More ${meal.meals[0]['strArea']} recipes:`
+    recipeListTitle.innerText = `More ${meal.meals[0]['strArea']} Recipes:`
   })
 })
 
@@ -185,7 +201,7 @@ searchBarIcon.addEventListener('click', (e) => {
         renderCenter(meal)
         renderSideBar(meal)
     })
-    recipeListTitle.innerText = `More "${searchBar.value}" recipes:`
+    recipeListTitle.innerText = `More "${searchBar.value}" Recipes:`
     form.reset()
 })
 
@@ -197,12 +213,49 @@ form.addEventListener('submit', (e) => {
         renderCenter(meal)
         renderSideBar(meal)
     })
-    recipeListTitle.innerText = `More "${searchBar.value}" recipes:`
+    recipeListTitle.innerText = `More "${searchBar.value}" Recipes:`
     form.reset()
 })
 
 
+shoppingCartIcon.addEventListener('click', () => {
+    modal.style.display = "block"
+})
 
+
+addToList.addEventListener('click', () => {
+    const ingredients = document.getElementsByClassName('ingredients')
+    const p = document.createElement('p')
+    p.innerText = "***"
+    const recipeList = document.getElementById('ingedients-shopping-list')
+    for(const ingredient in ingredients) {
+        const recipeListLi = document.createElement('li')
+        recipeListLi.innerText = ingredients[ingredient].innerText
+        if(recipeListLi.innerText !== 'undefined') {
+        recipeList.appendChild(recipeListLi)
+        }
+        recipeList.appendChild(p)
+        confirmation.style.display = "block"
+        addToList.style.display = "none"
+        setTimeout(() => {
+            confirmation.style.display = "none"
+            addToList.style.display = "block"
+        }, 1200)
+        console.log(ingredients)
+    }
+})
+
+span.addEventListener('click', () => {
+    modal.style.display = "none"
+})
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  
 function renderCenter(meal) {
     const mealObject = meal.meals[0]
     const selectedName = document.getElementById('recipe-name')
@@ -211,13 +264,12 @@ function renderCenter(meal) {
     const selectedIngedients2 = document.getElementById('ingredients-list-2')
     const selectedIngedients3 = document.getElementById('ingredients-list-3')
     const instructions = document.getElementById('instructions')
-
+    const measuresArry = [];
+    const ingredientsArry = [];
 
     selectedName.innerText = mealObject.strMeal
     selectedImage.setAttribute('src', mealObject.strMealThumb)
     instructions.innerText = mealObject.strInstructions
-    const measuresArry = [];
-    const ingredientsArry = [];
     
     for(const item in mealObject) {
         if(item.match(/strIngredient.*/)) {
@@ -254,7 +306,21 @@ function renderCenter(meal) {
         const checkbox = document.createElement('input')
         idCounter = idCounter ++
         ingredientLi.innerText = ingredient
+        ingredientLi.setAttribute('class', 'ingredients')
         ingredientLi.setAttribute('id', idCounter ++)
+        let isTrue = true;
+        ingredientLi.addEventListener('click', (e) => {
+            if(isTrue === true){
+            ingredientLi.setAttribute('class', '')
+            e.target.style.filter = "opacity(20%)"
+            isTrue = false
+            } else if(isTrue === false) {
+                ingredientLi.setAttribute('class', 'ingredients')
+                e.target.style.filter = "opacity(100%)"
+                isTrue = true
+            }
+            console.log(isTrue)
+        })
         if(ingredientLi.getAttribute('id') % 3 === 0) {
             selectedIngedients3.appendChild(ingredientLi)
         } else if(ingredientLi.getAttribute('id') % 2 === 0) {

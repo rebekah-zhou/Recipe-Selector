@@ -202,12 +202,13 @@ flex-direction: row;
 .card-list {
     list-style-position: inside;
     padding-left: 13px;
-    justify-content: center;
+    
 }
 
 
 #recipe-card {
     width: 80%;
+    
 }
 
 #recipe-index-card {
@@ -417,3 +418,88 @@ button:hover {
 .recipes-list:hover {
     color: #6B7C60;
 }
+
+.categories-img, .mainingredient-img, .region-img {
+    cursor: pointer;
+}
+
+.fa-shopping-basket {
+    color: #6B7C60;
+    font-size: 2rem;
+    margin-left: 1050px;
+    position: absolute;
+}
+
+.fa-shopping-basket:hover {
+    font-size: 2.2rem;
+    cursor: pointer;
+}
+
+.fa-plus {
+    color: #6B7C60;
+    font-size: 2rem;
+    margin-left: 1054px;
+    position: absolute;
+    margin-top: 45px;
+    display: block;
+}
+
+.fa-plus:hover {
+    font-size: 2.2rem;
+    cursor: pointer;
+}
+
+.fa-check-circle {
+    color: #42a202;
+    font-size: 3rem;
+    margin-left: 1045px;
+    position: absolute;
+    margin-top: 45px;
+    display: none;
+}
+
+#shopping-list-header {
+    padding: 0px 0px 0px 30px;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+    backdrop-filter: blur(4px);
+  }
+  
+
+  .modal-content {
+    background-color: #fff;
+    margin: 25% auto; 
+    padding: 20px 20px 20px 65px;
+    border: 1px solid #888;
+    width: 40%; 
+    background-color: #fff;
+    /* background-image:
+    linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+    linear-gradient(#eee .1em, transparent .1em);
+    background-size: 100% 1.3em; */
+  }
+  
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
