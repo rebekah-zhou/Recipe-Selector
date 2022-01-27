@@ -404,14 +404,14 @@ function renderSideBar(meals) {
                     word = word[0].toUpperCase() + word.slice(1)
                 }
                 return word
-            }
+            } else {return word}
         })
         const capitalizedName = newCapitalizedNameArr.join(' ')
         currentRecipesLi.innerText = capitalizedName
 
         currentRecipesLi.addEventListener('click', (e) => {
                 meals.meals.forEach(item => {
-                    if (e.target.textContent === item.strMeal) {
+                    if (e.target.textContent.toLowerCase() === item.strMeal.toLowerCase()) {
                         getFetch(`https:/www.themealdb.com/api/json/v1/1/lookup.php?i=${item.idMeal}`)
                         .then(renderCenter)
                     }
