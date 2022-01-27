@@ -1,4 +1,3 @@
-let hide = false;
 
 loadCategoriesMenu();
 loadMainIngredientsMenu();
@@ -66,14 +65,56 @@ function createThumbnailElements(filter, name, image) {
 }
 
 function makeFiltersEventListener() {
+    document.addEventListener('click', e => toggleHiddenContainer(), false)
     const filtersLi = document.querySelectorAll(".filter-li")
     filtersLi.forEach(filter => {
         filter.addEventListener('click', e => {
         const aFilter = e.target.textContent.toLowerCase().replace(/\s+/g, '')
         toggleHiddenContainer(aFilter)
+        e.stopPropagation();
         })
-    })
+    }, true)
 }
+
+const hideMenuObj = {
+    categories: true,
+    mainingredient: true,
+    region: true
+}
+
+function toggleHiddenContainer(specificFilter = "") {
+    for (const filter in hideMenuObj) {
+        if (filter === specificFilter) {
+            hideMenuObj[filter] = false
+        } else {
+            hideMenuObj[filter] = true
+        }
+    }
+    console.log(hideMenuObj)
+    for (const filter in hideMenuObj) {
+        const filterContainer = document.querySelector(`#${filter}`)
+        if (!hideMenuObj[filter]) {
+            filterContainer.style.display = "flex"
+        } else {
+            filterContainer.style.display = "none"
+        }
+    }
+}
+
+// function hideOnClickOutside(element) {
+//     const outsideClickListener = e => {
+//         if (e.target.closest(selector) === null) {
+//             element.style.display = 'none'
+//             removeClickListener()
+//         }
+//     }
+
+//     const removeClickListener = () => {
+//         document.removeEventListener('click', outsideClickListener)
+//     }
+
+//     document.addEventListener('click', outsideClickListener)
+// }
 
 function makeRegionMenuEventListener(meal) {
     const filterDivs = document.querySelectorAll(`#region .filter-div`)
@@ -102,27 +143,24 @@ function makeMenuEventListener(filter, filterLetter) {
     })
 }
 
-
-function toggleHiddenContainer(specificFilter) {
-    const specificFilterContainer = document.querySelector(`#${specificFilter}`)
-    hide =! hide
-    if (hide) {
-        specificFilterContainer.style.display = "flex"
-    } else {
-        specificFilterContainer.style.display = "none"
-    }
-}
-
 const randomMeal = ('https://www.themealdb.com/api/json/v1/1/random.php')
 const randomMealButton = document.getElementById('random-meal-button')
 const searchBar = document.getElementById('search-bar')
 const searchBarIcon = document.getElementById('search-bar-icon')
 const form = document.getElementById('search-form')
+const recipeListTitle = document.getElementById('recipe-list-title')
 
 fetch(randomMeal)
 .then (res => res.json())
 .then(meal => {
     renderCenter(meal)
+    // console.log(meal.meals[0]['strCategory'])
+    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=` + `${meal.meals[0]['strArea']}`)
+    .then(res => res.json())
+    .then(meals => {
+        renderSideBar(meals)
+    })
+    recipeListTitle.innerText = `More ${meal.meals[0]['strArea']} recipes:`
 })
 
 randomMealButton.addEventListener('click', () => {
@@ -130,6 +168,13 @@ randomMealButton.addEventListener('click', () => {
     .then(res => res.json())
     .then(meal => {
     renderCenter(meal)
+
+    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=` + `${meal.meals[0]['strArea']}`)
+    .then(res => res.json())
+    .then(meals => {
+        renderSideBar(meals)
+    })
+    recipeListTitle.innerText = `More ${meal.meals[0]['strArea']} recipes:`
   })
 })
 
@@ -140,7 +185,7 @@ searchBarIcon.addEventListener('click', (e) => {
         renderCenter(meal)
         renderSideBar(meal)
     })
-
+    recipeListTitle.innerText = `More "${searchBar.value}" recipes:`
     form.reset()
 })
 
@@ -152,7 +197,7 @@ form.addEventListener('submit', (e) => {
         renderCenter(meal)
         renderSideBar(meal)
     })
-
+    recipeListTitle.innerText = `More "${searchBar.value}" recipes:`
     form.reset()
 })
 
