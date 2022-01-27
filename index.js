@@ -119,7 +119,6 @@ function toggleHiddenContainer(specificFilter = "") {
 function makeRegionMenuEventListener(meal) {
     const filterDivs = document.querySelectorAll(`#region .filter-div`)
         filterDivs[filterDivs.length - 1].addEventListener('click', e => {
-            console.log(e.target)
             renderSideBar(meal)
             const firstMealId = meal.meals[0].idMeal
             getFetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${firstMealId}`)
