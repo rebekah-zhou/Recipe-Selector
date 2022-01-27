@@ -165,6 +165,8 @@ const shoppingCartIcon = document.getElementById('shopping-list')
 const addToList = document.getElementById('add-to-list')
 const span = document.getElementsByClassName("close")[0];
 const confirmation = document.getElementById('confirmation')
+const edit = document.getElementById('edit-btn')
+const deleteBtn = document.getElementsByClassName('delete-button')
 
 
 fetch(randomMeal)
@@ -231,8 +233,17 @@ addToList.addEventListener('click', () => {
     const recipeList = document.getElementById('ingedients-shopping-list')
     for(const ingredient in ingredients) {
         const recipeListLi = document.createElement('li')
-        recipeListLi.innerText = ingredients[ingredient].innerText
-        if(recipeListLi.innerText !== 'undefined') {
+        const span = document.createElement('span')
+        const check = document.createElement('input')
+        // const deleteBtn = document.createElement('button')
+        // deleteBtn.setAttribute('class', 'delete-button')
+        // deleteBtn.innerText = 'x'
+        check.setAttribute('class', 'check-box')
+        check.setAttribute('type', 'checkbox')
+        recipeListLi.setAttribute('class', 'list-items')
+        recipeListLi.append(span, check, deleteBtn)
+        span.innerText = ingredients[ingredient].innerText
+        if(span.innerText !== 'undefined') {
         recipeList.appendChild(recipeListLi)
         }
         recipeList.appendChild(p)
@@ -256,7 +267,18 @@ window.onclick = function(event) {
     }
   }
 
+  shoppingCartIcon.addEventListener('mouseover', (e) => {
+      shoppingCartIcon.style.fontSize = "2.2rem"
+      shoppingCartIcon.style.cursor = "pointer"
+  })
+
+  shoppingCartIcon.addEventListener('mouseout', (e) => {
+    shoppingCartIcon.style.fontSize = "2rem"
+    shoppingCartIcon.style.cursor = "none"
+})
   
+
+
 function renderCenter(meal) {
     const mealObject = meal.meals[0]
     const selectedName = document.getElementById('recipe-name')
@@ -325,9 +347,9 @@ function renderCenter(meal) {
         if(ingredientLi.getAttribute('id') % 3 === 0) {
             selectedIngedients3.appendChild(ingredientLi)
         } else if(ingredientLi.getAttribute('id') % 2 === 0) {
-            selectedIngedients2.appendChild(ingredientLi)
-        } else {
             selectedIngedients1.appendChild(ingredientLi)
+        } else {
+            selectedIngedients2.appendChild(ingredientLi)
         }
     })
 }
