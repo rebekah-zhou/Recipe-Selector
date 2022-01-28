@@ -10,8 +10,8 @@ function getFetch(url) {
 }
 
 function loadCategoriesMenu() {
-    // const categoriesUrl = 'http://localhost:3000/categories'
-    const categoriesUrl = 'https://rebekah-zhou.github.io/Data/render-recipes.json/categories'
+    const categoriesUrl = 'http://localhost:3000/categories'
+    // const categoriesUrl = 'https://rebekah-zhou.github.io/Data/render-recipes.json/categories'
     getFetch(categoriesUrl)
     .then(categories => {
         categories.forEach(categoryObj => {
@@ -23,8 +23,8 @@ function loadCategoriesMenu() {
 }
 
 function loadMainIngredientsMenu() {
-    // const mainIngredientUrl = 'http://localhost:3000/meals'
-    const mainIngredientUrl = 'https://rebekah-zhou.github.io/Data/render-recipes.json/meals'
+    const mainIngredientUrl = 'http://localhost:3000/meals'
+    // const mainIngredientUrl = 'https://rebekah-zhou.github.io/Data/render-recipes.json/meals'
     getFetch(mainIngredientUrl)
     .then(mainIngredient => {
         mainIngredient.forEach(ingredientObj => {
