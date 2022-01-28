@@ -1,31 +1,37 @@
-Font - Playfair display
+# Render Recipes
+This project is a web application that allows users to browse recipes from around the world. 
 
-Recipe Card 
-    Title in handwritten font (comforter brush)
-    Inspiration for Recipe card structure 
-        https://cdn.shopify.com/s/files/1/0023/3789/8540/products/02DetailShot01_faac0e4f-a824-4fbd-8c34-7ef74066281a.jpg?v=1618258881%20//cdn.shopify.com/s/files/1/0023/3789/8540/products/02DetailShot01_faac0e4f-a824-4fbd-8c34-7ef74066281a.jpg?v=1618258881%20//cdn.shopify.com/s/files/1/0023/3789/8540/products/02DetailShot01_faac0e4f-a824-4fbd-8c34-7ef74066281a.jpg?v=1618258881
 
-Recipe API 
+Recipes are provided by the following API: 
     https://www.themealdb.com/api.php
 
-Color Scheme 
-/* Color Theme Swatches in Hex */
-.My-Color-Theme-1-hex { color: #6B7C60; }
-.My-Color-Theme-2-hex { color: #E8E7D1; }
-.My-Color-Theme-3-hex { color: #FFFEFA; }
-.My-Color-Theme-4-hex { color: #E8DDD1; }
-.My-Color-Theme-5-hex { color: #FFEBE6; }
+## Users can do the following:
+- Filter through recipes by category, main ingredient, and region
+- Search by name/keyword for a recipe
+- Generate a random recipe
+- Add ingredients from multiple recipes to a shopping list
+- Print the selected ingredients from the shopping list
 
-/* Color Theme Swatches in RGBA */
-.My-Color-Theme-1-rgba { color: rgba(107, 124, 96, 1); }
-.My-Color-Theme-2-rgba { color: rgba(232, 231, 209, 1); }
-.My-Color-Theme-3-rgba { color: rgba(255, 254, 250, 1); }
-.My-Color-Theme-4-rgba { color: rgba(232, 221, 209, 1); }
-.My-Color-Theme-5-rgba { color: rgba(255, 235, 230, 1); }
+## In the future, we hope that users can do the following: 
+- Favorite a recipe and access all favorited recipes
+- Access the instructional video for each recipe
+- Hover over a category/main ingredient/region to see a description
 
-/* Color Theme Swatches in HSLA */
-.My-Color-Theme-1-hsla { color: hsla(96, 12, 43, 1); }
-.My-Color-Theme-2-hsla { color: hsla(57, 33, 86, 1); }
-.My-Color-Theme-3-hsla { color: hsla(48, 100, 99, 1); }
-.My-Color-Theme-4-hsla { color: hsla(31, 33, 86, 1); }
-.My-Color-Theme-5-hsla { color: hsla(11, 100, 95, 1); }
+## Instructions to Install and Run the Project
+* First, you'll need to install JSON Server globally on your machine. In your terminal run the following: 
+```console
+$ npm install -g json-server
+```
+* Since we're using our local computer as the server, you'll run the database file (db.json) using the following command: 
+```console
+$ json-server --watch db.json
+```
+* Once the server is up, open the HTML file in your browser using (mac users)
+```console
+$ open index.html
+```
+or (windows users)
+```console
+$ explorer.exe index.html
+```
+* Enjoy!
